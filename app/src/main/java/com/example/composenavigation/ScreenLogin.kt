@@ -12,7 +12,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.AnnotatedString
+import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -58,16 +61,43 @@ fun ScreenLogin(
                 .padding(top = 50.dp)
         )
 
+        val text = buildAnnotatedString {
+            append(
+                AnnotatedString(
+                    text = "If you don't have an account register \n" +
+                            "You can ",
+                    spanStyle = SpanStyle(
+                        color = Color.Black,
+                        fontSize = 16.sp,
+                        fontFamily = OpenSans,
+                        fontWeight = FontWeight.Normal
+                    )
+                )
+            )
+
+            append(
+                AnnotatedString(
+                    text = "register here !",
+                    spanStyle = SpanStyle(
+                        color = Purple700,
+                        fontSize = 16.sp,
+                        fontFamily = OpenSans,
+                        fontWeight = FontWeight.Bold
+                    )
+                )
+            )
+
+        }
+
         Text(
-            text = "If you don't have an account register \nYou can register here ! ",
-            color = Color.Black,
-            fontWeight = FontWeight.Normal,
-            fontSize = 16.sp,
-            fontFamily = OpenSans,
-            modifier = Modifier
-                .align(Alignment.Start)
-                .padding(top = 40.dp)
+            text = text, modifier = Modifier
+                .fillMaxWidth()
+                .padding(top = 50.dp)
         )
+
+
+
+
 
         OutlinedTextField(
             value = "",
@@ -80,7 +110,7 @@ fun ScreenLogin(
                 .padding(top = 50.dp),
             leadingIcon = {
                 Icon(
-                    painter = painterResource(id = R.drawable.ic_baseline_email_24) ,
+                    painter = painterResource(id = R.drawable.ic_baseline_email_24),
                     contentDescription = null,
                     Modifier.size(25.dp),
                     tint = Purple700
@@ -99,55 +129,89 @@ fun ScreenLogin(
                 .padding(top = 10.dp),
             leadingIcon = {
                 Icon(
-                    painter = painterResource(id = R.drawable.ic_baseline_lock_24) ,
+                    painter = painterResource(id = R.drawable.ic_baseline_lock_24),
+                    contentDescription = null,
+                    Modifier.size(25.dp),
+                    tint = Purple700
+                )
+            },
+            trailingIcon = {
+                Icon(
+                    painter = painterResource(id = R.drawable.ic_baseline_remove_red_eye_24),
                     contentDescription = null,
                     Modifier.size(25.dp),
                     tint = Purple700
                 )
             }
+
         )
 
-        Text(
-            text = "Forget Password ?",
-            color = Purple700,
-            fontWeight = FontWeight.Bold,
-            fontSize = 16.sp,
-            fontFamily = OpenSans,
+
+
+        Row(
             modifier = Modifier
-                .align(Alignment.End)
-                .padding(top = 10.dp)
-        )
+                .fillMaxWidth()
+                .padding(top = 10.dp),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.SpaceBetween
+        ) {
+
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.Start
+            ) {
+
+                Checkbox(
+                    checked = true,
+                    onCheckedChange = {
+
+                    }
+                )
+
+                Text(
+                    text = "Remember me",
+                    color = Purple700,
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 14.sp,
+                    fontFamily = OpenSans,
+                    modifier = Modifier
+                )
+            }
+
+            Text(
+                text = "Forget Password ?",
+                color = Purple700,
+                fontWeight = FontWeight.Bold,
+                fontSize = 14.sp,
+                fontFamily = OpenSans,
+                modifier = Modifier
+            )
+        }
 
         Card(
             backgroundColor = Purple700,
-            shape = RoundedCornerShape(46.dp),
+            shape = RoundedCornerShape(10.dp),
             elevation = 10.dp,
             modifier = Modifier
                 .fillMaxWidth()
-                .heightIn(80.dp)
+                .heightIn(65.dp)
                 .padding(top = 50.dp)
         ) {
             Box(
-                modifier = Modifier.fillMaxWidth(),
+                modifier = Modifier.fillMaxWidth().heightIn(65.dp),
                 contentAlignment = Alignment.Center
             ) {
                 Text(
                     text = "Login",
                     color = Color.White,
                     fontWeight = FontWeight.Bold,
-                    fontSize = 30.sp,
+                    fontSize = 18.sp,
                     fontFamily = OpenSans,
                     modifier = Modifier
                         .align(Alignment.Center)
-                        .padding(10.dp)
                 )
             }
         }
-
-
-
-
-
 
 
     }
